@@ -32,7 +32,7 @@ const AuthScreen = ({ navigation }: any) => {
       />
       
       <LinearGradient
-        colors={['#090FFA', '#6E45E2', '#88D3CE']}
+        colors={['#1a6103', '#2a9508', '#66f338']}
         style={[styles.container, { paddingTop: statusBarHeight }]}
       >
         {/* <TouchableOpacity style={styles.exitButton} onPress={exitApp}>

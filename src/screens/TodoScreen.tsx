@@ -117,7 +117,7 @@ const TodoScreen: React.FC<TodoScreenProps> = ({ navigation }) => {
       />
       
       <LinearGradient 
-        colors={['#090FFA','#88D3CE', '#6E45E2']} 
+        colors={['#1a6103','#88D3CE', '#b7e4c7']} 
         style={[styles.containerGlobal, { paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }]}
       >
         <TouchableOpacity 

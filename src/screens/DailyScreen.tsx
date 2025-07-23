@@ -167,7 +167,7 @@ const DailyScreen = ({ navigation }: any) => {
       />
       
       <LinearGradient
-        colors={['#090FFA', '#0eb9e3', '#58fd03']}
+        colors={['#1a6103', '#1a6103', '#b7e4c7']}
         style={[styles.container, { paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }]}
       >
         <TouchableOpacity

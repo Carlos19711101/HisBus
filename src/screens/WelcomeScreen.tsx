@@ -35,7 +35,7 @@ const WelcomeScreen = ({ navigation }: any) => {
       />
       
       <LinearGradient
-        colors={['#090FFA', '#6E45E2', '#88D3CE']}
+        colors={['#1a6103', '#2a9508', '#66f338']}
         style={[styles.container, { paddingTop: STATUS_BAR_HEIGHT }]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}

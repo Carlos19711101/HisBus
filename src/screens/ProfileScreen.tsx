@@ -174,7 +174,7 @@ const ProfileScreen = ({ navigation }: any) => {
         barStyle="light-content"
       />
       <LinearGradient
-        colors={['#090FFA', '#6E45E2', '#88D3CE']}
+        colors={['#1a6103', '#1a6103', '#b7e4c7']}
         style={styles.container}
       >
         <ScrollView
