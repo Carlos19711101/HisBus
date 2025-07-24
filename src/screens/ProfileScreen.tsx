@@ -1,4 +1,3 @@
-// screens/ProfileScreen.tsx
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -18,33 +17,37 @@ import styles from './ProfileScreen.styles';
 
 const ProfileScreen = ({ navigation }: any) => {
   // Estados
-  const [avatar, setAvatar] = useState(require('../../assets/imagen/perfil_Moto.png'));
+  const [avatar, setAvatar] = useState(require('../../assets/imagen/perfilBus.png'));
   const [modalVisible, setModalVisible] = useState(false);
 
   // Estados para modales de edición
   const [editSoatModalVisible, setEditSoatModalVisible] = useState(false);
   const [editPicoyplacaModalVisible, setEditPicoyplacaModalVisible] = useState(false);
   const [editTecnicoModalVisible, setEditTecnicoModalVisible] = useState(false);
+  const [editCivilModalVisible, setEditCivilModalVisible] = useState(false);
+  const [editContractualModalVisible, setEditContractualModalVisible] = useState(false);
 
   // Datos que se muestran y guardan
   const [tabData, setTabData] = useState({
-    soat: '',        // Aquí estará el texto editado o vacío para mostrar "Editar"
+    soat: '',
     picoyplaca: '',
     tecnico: '',
+    civil: '',
+    contractual: '',
   });
 
   // Valores temporales para editar en modal
   const [editSoatValue, setEditSoatValue] = useState('');
   const [editPicoyplacaValue, setEditPicoyplacaValue] = useState('');
   const [editTecnicoValue, setEditTecnicoValue] = useState('');
+  const [editCivilValue, setEditCivilValue] = useState('');
+  const [editContractualValue, setEditContractualValue] = useState('');
 
-  // Datos de la moto
+  // Datos de la moto (solo Marca y Placa)
   const [editMotoModalVisible, setEditMotoModalVisible] = useState(false);
   const [userData, setUserData] = useState({
     Marca: '',
     Placa: '',
-    Propietario: '',
-    Ciudad: '',
   });
   const [editMotoValues, setEditMotoValues] = useState(userData);
 
@@ -61,13 +64,20 @@ const ProfileScreen = ({ navigation }: any) => {
         const tabDataString = await AsyncStorage.getItem('@tabData');
         if (tabDataString) {
           const tabs = JSON.parse(tabDataString);
-          setTabData(tabs);
-          setEditSoatValue(tabs.soat);
-          setEditPicoyplacaValue(tabs.picoyplaca);
-          setEditTecnicoValue(tabs.tecnico);
+          setTabData({
+            soat: tabs.soat || '',
+            picoyplaca: tabs.picoyplaca || '',
+            tecnico: tabs.tecnico || '',
+            civil: tabs.civil || '',
+            contractual: tabs.contractual || '',
+          });
+          setEditSoatValue(tabs.soat || '');
+          setEditPicoyplacaValue(tabs.picoyplaca || '');
+          setEditTecnicoValue(tabs.tecnico || '');
+          setEditCivilValue(tabs.civil || '');
+          setEditContractualValue(tabs.contractual || '');
         } else {
-          // Inicializar con cadenas vacías para mostrar "Editar"
-          setTabData({ soat: '', picoyplaca: '', tecnico: '' });
+          setTabData({ soat: '', picoyplaca: '', tecnico: '', civil: '', contractual: '' });
         }
         const avatarUri = await AsyncStorage.getItem('@avatarUri');
         if (avatarUri) {
@@ -154,7 +164,21 @@ const ProfileScreen = ({ navigation }: any) => {
     setEditTecnicoModalVisible(false);
   };
 
-  // Editar información de la moto
+  const handleSaveEditCivil = () => {
+    const newTabData = { ...tabData, civil: editCivilValue.trim() || '' };
+    setTabData(newTabData);
+    saveTabData(newTabData);
+    setEditCivilModalVisible(false);
+  };
+
+  const handleSaveEditContractual = () => {
+    const newTabData = { ...tabData, contractual: editContractualValue.trim() || '' };
+    setTabData(newTabData);
+    saveTabData(newTabData);
+    setEditContractualModalVisible(false);
+  };
+
+  // Editar información de la moto (solo Marca y Placa)
   const handleOpenEditMoto = () => {
     setEditMotoValues(userData);
     setEditMotoModalVisible(true);
@@ -174,7 +198,9 @@ const ProfileScreen = ({ navigation }: any) => {
         barStyle="light-content"
       />
       <LinearGradient
-        colors={['#1a6103', '#1a6103', '#b7e4c7']}
+       colors={['#020c6d', '#3446f5', '#040447']}
+        start={{ x: 0.4, y: 0 }}
+        end={{ x: 1, y: 0.7 }}
         style={styles.container}
       >
         <ScrollView
@@ -213,12 +239,42 @@ const ProfileScreen = ({ navigation }: any) => {
             <View style={styles.centeredInfoContainer}>
               <Text style={styles.resultText}>{userData.Marca}</Text>
               <Text style={styles.resultText}>{userData.Placa}</Text>
-              <Text style={styles.resultText}>{userData.Propietario}</Text>
-              <Text style={styles.resultText}>{userData.Ciudad}</Text>
             </View>
           </View>
 
           <View style={styles.verticalButtonRow}>
+            {/* Civil Extracontractual */}
+            <View style={styles.buttonWithResult}>
+              <TouchableOpacity
+                style={[styles.editButtonCompact, styles.editButtonCompact]}
+                onPress={() => {
+                  setEditCivilValue(tabData.civil);
+                  setEditCivilModalVisible(true);
+                }}
+              >
+                <Text style={[styles.editButtonText]}>Extracontractual</Text>
+              </TouchableOpacity>
+              <Text style={styles.resultTextRight}>
+                {tabData.civil ? tabData.civil : 'Editar'}
+              </Text>
+            </View>
+
+            {/* Contractual Escolar */}
+            <View style={styles.buttonWithResult}>
+              <TouchableOpacity
+                style={[styles.editButtonCompact, styles.editButtonCompact]}
+                onPress={() => {
+                  setEditContractualValue(tabData.contractual);
+                  setEditContractualModalVisible(true);
+                }}
+              >
+                <Text style={[styles.editButtonText]}>Contractual</Text>
+              </TouchableOpacity>
+              <Text style={styles.resultTextRight}>
+                {tabData.contractual ? tabData.contractual : 'Editar'}
+              </Text>
+            </View>
+
             {/* SOAT */}
             <View style={styles.buttonWithResult}>
               <TouchableOpacity
@@ -260,7 +316,7 @@ const ProfileScreen = ({ navigation }: any) => {
                   setEditTecnicoModalVisible(true);
                 }}
               >
-                <Text style={styles.editButtonText}>Vence Técnico Mecánica</Text>
+                <Text style={styles.editButtonText}>Técnico Mecánica</Text>
               </TouchableOpacity>
               <Text style={styles.resultTextRight}>
                 {tabData.tecnico ? tabData.tecnico : 'Editar'}
@@ -295,7 +351,7 @@ const ProfileScreen = ({ navigation }: any) => {
             </View>
           </Modal>
 
-          {/* Modal para editar información de la moto */}
+          {/* Modal para editar información de la moto (solo Marca y Placa) */}
           <Modal
             visible={editMotoModalVisible}
             transparent
@@ -304,40 +360,86 @@ const ProfileScreen = ({ navigation }: any) => {
           >
             <View style={styles.editModalOverlay}>
               <View style={styles.editModalContent}>
-                <Text style={styles.editModalTitle}>Editar Información de la Moto</Text>
-                <TextInput 
-                  style={styles.editModalInput} 
-                  value={editMotoValues.Marca} 
-                  onChangeText={text => setEditMotoValues(prev => ({ ...prev, Marca: text }))} 
-                  placeholder="Marca" 
-                  placeholderTextColor="#888" 
+                <Text style={styles.editModalTitle}>Editar Información</Text>
+                <TextInput
+                  style={styles.editModalInput}
+                  value={editMotoValues.Marca}
+                  onChangeText={text => setEditMotoValues(prev => ({ ...prev, Marca: text }))}
+                  placeholder="Marca"
+                  placeholderTextColor="#888"
                 />
-                <TextInput 
-                  style={styles.editModalInput} 
-                  value={editMotoValues.Placa} 
-                  onChangeText={text => setEditMotoValues(prev => ({ ...prev, Placa: text }))} 
-                  placeholder="Placa" 
-                  placeholderTextColor="#888" 
-                />
-                <TextInput 
-                  style={styles.editModalInput} 
-                  value={editMotoValues.Propietario} 
-                  onChangeText={text => setEditMotoValues(prev => ({ ...prev, Propietario: text }))} 
-                  placeholder="Propietario" 
-                  placeholderTextColor="#888" 
-                />
-                <TextInput 
-                  style={styles.editModalInput} 
-                  value={editMotoValues.Ciudad} 
-                  onChangeText={text => setEditMotoValues(prev => ({ ...prev, Ciudad: text }))} 
-                  placeholder="Ciudad" 
-                  placeholderTextColor="#888" 
+                <TextInput
+                  style={styles.editModalInput}
+                  value={editMotoValues.Placa}
+                  onChangeText={text => setEditMotoValues(prev => ({ ...prev, Placa: text }))}
+                  placeholder="Placa"
+                  placeholderTextColor="#888"
                 />
                 <View style={styles.editModalButtonRow}>
                   <TouchableOpacity style={styles.editModalSaveButton} onPress={handleSaveEditMoto}>
                     <Text style={styles.editModalSaveButtonText}>Guardar</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.editModalCancelButton} onPress={() => setEditMotoModalVisible(false)}>
+                    <Text style={styles.editModalCancelButtonText}>Cancelar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </Modal>
+
+          {/* Modal para editar Civil Extracontractual */}
+          <Modal
+            visible={editCivilModalVisible}
+            transparent
+            animationType="fade"
+            onRequestClose={() => setEditCivilModalVisible(false)}
+          >
+            <View style={styles.editModalOverlay}>
+              <View style={styles.editModalContent}>
+                <Text style={styles.editModalTitle}>Extracontractual</Text>
+                <TextInput
+                  style={styles.editModalInput}
+                  value={editCivilValue}
+                  onChangeText={setEditCivilValue}
+                  multiline
+                  placeholder="Escribe aquí..."
+                  placeholderTextColor="#888"
+                />
+                <View style={styles.editModalButtonRow}>
+                  <TouchableOpacity style={styles.editModalSaveButton} onPress={handleSaveEditCivil}>
+                    <Text style={styles.editModalSaveButtonText}>Guardar</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.editModalCancelButton} onPress={() => setEditCivilModalVisible(false)}>
+                    <Text style={styles.editModalCancelButtonText}>Cancelar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </Modal>
+
+          {/* Modal para editar Contractual Escolar */}
+          <Modal
+            visible={editContractualModalVisible}
+            transparent
+            animationType="fade"
+            onRequestClose={() => setEditContractualModalVisible(false)}
+          >
+            <View style={styles.editModalOverlay}>
+              <View style={styles.editModalContent}>
+                <Text style={styles.editModalTitle}>Contractual</Text>
+                <TextInput
+                  style={styles.editModalInput}
+                  value={editContractualValue}
+                  onChangeText={setEditContractualValue}
+                  multiline
+                  placeholder="Escribe aquí..."
+                  placeholderTextColor="#888"
+                />
+                <View style={styles.editModalButtonRow}>
+                  <TouchableOpacity style={styles.editModalSaveButton} onPress={handleSaveEditContractual}>
+                    <Text style={styles.editModalSaveButtonText}>Guardar</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.editModalCancelButton} onPress={() => setEditContractualModalVisible(false)}>
                     <Text style={styles.editModalCancelButtonText}>Cancelar</Text>
                   </TouchableOpacity>
                 </View>
@@ -355,13 +457,13 @@ const ProfileScreen = ({ navigation }: any) => {
             <View style={styles.editModalOverlay}>
               <View style={styles.editModalContent}>
                 <Text style={styles.editModalTitle}>Vencimiento Soat</Text>
-                <TextInput 
-                  style={styles.editModalInput} 
-                  value={editSoatValue} 
-                  onChangeText={setEditSoatValue} 
-                  multiline 
-                  placeholder="Escribe aquí..." 
-                  placeholderTextColor="#888" 
+                <TextInput
+                  style={styles.editModalInput}
+                  value={editSoatValue}
+                  onChangeText={setEditSoatValue}
+                  multiline
+                  placeholder="Escribe aquí..."
+                  placeholderTextColor="#888"
                 />
                 <View style={styles.editModalButtonRow}>
                   <TouchableOpacity style={styles.editModalSaveButton} onPress={handleSaveEditSoat}>
@@ -374,7 +476,7 @@ const ProfileScreen = ({ navigation }: any) => {
               </View>
             </View>
           </Modal>
-          
+
           {/* Modal para editar Pico y Placa */}
           <Modal
             visible={editPicoyplacaModalVisible}
@@ -385,13 +487,13 @@ const ProfileScreen = ({ navigation }: any) => {
             <View style={styles.editModalOverlay}>
               <View style={styles.editModalContent}>
                 <Text style={styles.editModalTitle}>Pico y Placa</Text>
-                <TextInput 
-                  style={styles.editModalInput} 
-                  value={editPicoyplacaValue} 
-                  onChangeText={setEditPicoyplacaValue} 
-                  multiline 
-                  placeholder="Escribe aquí..." 
-                  placeholderTextColor="#888" 
+                <TextInput
+                  style={styles.editModalInput}
+                  value={editPicoyplacaValue}
+                  onChangeText={setEditPicoyplacaValue}
+                  multiline
+                  placeholder="Escribe aquí..."
+                  placeholderTextColor="#888"
                 />
                 <View style={styles.editModalButtonRow}>
                   <TouchableOpacity style={styles.editModalSaveButton} onPress={handleSaveEditPicoyplaca}>
@@ -415,13 +517,13 @@ const ProfileScreen = ({ navigation }: any) => {
             <View style={styles.editModalOverlay}>
               <View style={styles.editModalContent}>
                 <Text style={styles.editModalTitle}>Vencimiento Técnico Mecánica</Text>
-                <TextInput 
-                  style={styles.editModalInput} 
-                  value={editTecnicoValue} 
-                  onChangeText={setEditTecnicoValue} 
-                  multiline 
-                  placeholder="Escribe aquí..." 
-                  placeholderTextColor="#888" 
+                <TextInput
+                  style={styles.editModalInput}
+                  value={editTecnicoValue}
+                  onChangeText={setEditTecnicoValue}
+                  multiline
+                  placeholder="Escribe aquí..."
+                  placeholderTextColor="#888"
                 />
                 <View style={styles.editModalButtonRow}>
                   <TouchableOpacity style={styles.editModalSaveButton} onPress={handleSaveEditTecnico}>

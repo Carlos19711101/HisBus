@@ -77,6 +77,7 @@ const styles = StyleSheet.create<Styles>({
     left: 20,
     zIndex: 10,
     padding: 5,
+    marginTop:  10,
   },
   pagination: {
     flexDirection: 'row',
@@ -100,7 +101,7 @@ const styles = StyleSheet.create<Styles>({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 10,
-    marginTop: 25,
+    marginTop: 5,
     right: -10,
   },
    footerContainer: {

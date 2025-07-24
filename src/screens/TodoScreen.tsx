@@ -44,16 +44,16 @@ const TodoScreen: React.FC<TodoScreenProps> = ({ navigation }) => {
     'https://cdn-icons-png.flaticon.com/512/3652/3652191.png',
     'https://cdn-icons-png.flaticon.com/128/4606/4606919.png',
     'https://cdn-icons-png.flaticon.com/128/805/805680.png',
-    'https://cdn-icons-png.flaticon.com/128/1048/1048334.png',
+    'https://cdn-icons-png.flaticon.com/128/1048/1048333.png',
     'https://cdn-icons-png.flaticon.com/128/1133/1133816.png',
     'https://cdn-icons-png.flaticon.com/128/11133/11133672.png'
   ];
 
   const originalCards: CardItem[] = [
-    { id: '1', title: 'Profile', subtitle: 'Motocicleta \n Datos  ', color: '#33ee0d', screenName: 'Profile', image: demoImages[3] },
-    { id: '2', title: 'Daily', subtitle: 'Actividades \n Diarias', color: '#eb0dee', screenName: 'Daily', image: demoImages[0] },
-    { id: '3', title: 'Preventive', subtitle: 'Mantenimiento preventivo', color: '#0deeda', screenName: 'Preventive', image: demoImages[1] },
-    { id: '4', title: 'Mantenimiento', subtitle: 'General ', color: '#090FFA', screenName: 'General', image: demoImages[5] },
+    { id: '1', title: 'Profile', subtitle: 'Autobus \n Datos  ', color: '#13d6b2', screenName: 'Profile', image: demoImages[3] },
+    { id: '2', title: 'Daily', subtitle: 'Actividades \n Diarias', color: '#db07de', screenName: 'Daily', image: demoImages[0] },
+    { id: '3', title: 'Preventive', subtitle: 'Mantenimiento preventivo', color: '#1abc09', screenName: 'Preventive', image: demoImages[1] },
+    { id: '4', title: 'Mantenimiento', subtitle: 'General ', color: '#ebda0c', screenName: 'General', image: demoImages[5] },
     { id: '5', title: 'Emergency', subtitle: 'Casos de emergencia', color: '#FF5252', screenName: 'Emergency', image: demoImages[2] },
     { id: '6', title: 'Route', subtitle: '  Rutas \n  recorridos', color: '#810dee', screenName: 'Route', image: demoImages[4] },
   ];
@@ -117,7 +117,9 @@ const TodoScreen: React.FC<TodoScreenProps> = ({ navigation }) => {
       />
       
       <LinearGradient 
-        colors={['#1a6103','#88D3CE', '#b7e4c7']} 
+        colors={['#020c6d', '#3446f5', '#040447']}
+        start={{ x: 0.4, y: 0 }}
+        end={{ x: 1, y: 0.9 }}
         style={[styles.containerGlobal, { paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }]}
       >
         <TouchableOpacity 

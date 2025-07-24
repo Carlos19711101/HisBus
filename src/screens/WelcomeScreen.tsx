@@ -35,10 +35,11 @@ const WelcomeScreen = ({ navigation }: any) => {
       />
       
       <LinearGradient
-        colors={['#1a6103', '#2a9508', '#66f338']}
+        colors={['#020c6d', '#3446f5', '#040447']}
+        start={{ x: 0.4, y: 0 }}
+        end={{ x: 1, y: 0.7 }}
         style={[styles.container, { paddingTop: STATUS_BAR_HEIGHT }]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+       
       >
         {/* Botón de salida - Ajustado para considerar el StatusBar */}
         <TouchableOpacity 
@@ -54,7 +55,7 @@ const WelcomeScreen = ({ navigation }: any) => {
           
           <TouchableOpacity 
             style={styles.button}
-            onPress={() => navigation.navigate('AuthScreen')}
+            onPress={() => navigation.navigate('Todo')}
             activeOpacity={0.7}
           >
             <Text style={styles.buttonText}>Comenzar</Text>

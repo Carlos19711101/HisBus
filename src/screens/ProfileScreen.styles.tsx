@@ -174,7 +174,7 @@ const styles = StyleSheet.create<Styles>({
     alignSelf: 'center',
   },
   verticalButtonRow: {
-    marginTop: 20,
+    marginTop: -5,
     paddingHorizontal: width * 0.05,
   },
   buttonWithResult: {

@@ -167,7 +167,9 @@ const GeneralScreen = ({ navigation }: any) => {
       />
       
       <LinearGradient
-        colors={['#090FFA', '#0eb9e3', '#58fd03']}
+        colors={['#020c6d', '#3446f5', '#040447']}
+        start={{ x: 0.4, y: 0 }}
+        end={{ x: 1, y: 0.7 }}
         style={[styles.container, { paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }]}
       >
         <TouchableOpacity
