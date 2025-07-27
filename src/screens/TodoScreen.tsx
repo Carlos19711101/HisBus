@@ -53,8 +53,8 @@ const TodoScreen: React.FC<TodoScreenProps> = ({ navigation }) => {
     { id: '1', title: 'Profile', subtitle: 'Autobus \n Datos  ', color: '#13d6b2', screenName: 'Profile', image: demoImages[3] },
     { id: '2', title: 'Daily', subtitle: 'Actividades \n Diarias', color: '#db07de', screenName: 'Daily', image: demoImages[0] },
     { id: '3', title: 'Preventive', subtitle: 'Mantenimiento preventivo', color: '#1abc09', screenName: 'Preventive', image: demoImages[1] },
-    { id: '4', title: 'Mantenimiento', subtitle: 'General ', color: '#ebda0c', screenName: 'General', image: demoImages[5] },
-    { id: '5', title: 'Emergency', subtitle: 'Casos de emergencia', color: '#FF5252', screenName: 'Emergency', image: demoImages[2] },
+    { id: '4', title: 'Maintenance', subtitle: 'Mantenimiento \n General ', color: '#ebda0c', screenName: 'General', image: demoImages[5] },
+    { id: '5', title: 'Emergency', subtitle: 'Emergencia \n En Via', color: '#FF5252', screenName: 'Emergency', image: demoImages[2] },
     { id: '6', title: 'Route', subtitle: '  Rutas \n  recorridos', color: '#810dee', screenName: 'Route', image: demoImages[4] },
   ];
 
