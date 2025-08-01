@@ -6,25 +6,25 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#00000000",
+    "backgroundColor": "#FFFFFF",
     "splash": {
       "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#00000000"
+      "backgroundColor": "#FFFFFF"
     },
     "plugins": [
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow HisMoto to access your camera",
-          "microphonePermission": "Allow HisMoto to access your microphone",
+          "cameraPermission": "Allow HisBus to access your camera",
+          "microphonePermission": "Allow HisBus to access your microphone",
           "recordAudioAndroid": true
         }
       ]
     ],
     "ios": {
       "supportsTablet": true,
-      "backgroundColor": "#00000000",
+      "backgroundColor": "#FFFFFF",
       "infoPlist": {
         "NSCameraUsageDescription": "Esta aplicación necesita acceso a la cámara para tomar fotos.",
         "NSMicrophoneUsageDescription": "Esta aplicación necesita acceso al micrófono para grabar audio."
@@ -33,7 +33,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#00000000"
+        "backgroundColor": "#FFFFFF"
       },
       "package": "com.carlosvelez.hisbus",
       "versionCode": 2,
@@ -43,7 +43,7 @@
       ],
       "softwareKeyboardLayoutMode": "pan",
       "statusBar": {
-        "backgroundColor": "#00000000",
+        "backgroundColor": "#FFFFFF",
         "translucent": true
       }
     },
